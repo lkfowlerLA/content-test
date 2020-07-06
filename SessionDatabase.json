@@ -58,6 +58,7 @@
                 "resource":{
                     "id": "[parameters('tableName')]"
                 },
+                "tableName": "[concat(variables('accountName'), '/', parameters('tableName'))]",
                 "options": { "throughput": "[parameters('throughput')]" }
             }
         }
