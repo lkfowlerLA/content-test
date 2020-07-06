@@ -33,7 +33,15 @@
         }
     },
     "variables": {
-        "accountName": "[toLower(parameters('accountName'))]"
+        "accountName": "[toLower(parameters('accountName'))]",
+        "locations": 
+        [ 
+            {
+                "locationName": "westus",
+                "failoverPriority": 0,
+                "isZoneRedundant": false
+            }
+        ]
     },
     "resources": 
     [
@@ -46,7 +54,7 @@
             "properties": {
                 "capabilities": [{ "name": "EnableTable" }],
                 "databaseAccountOfferType": "Standard",
-                "locations": "westus"
+                "locations": "[variables('locations')]"
             }
         },
         {
@@ -58,7 +66,6 @@
                 "resource":{
                     "id": "[parameters('tableName')]"
                 },
-                "tableName": "[concat(variables('accountName'), '/', parameters('tableName'))]",
                 "options": { "throughput": "[parameters('throughput')]" }
             }
         }
